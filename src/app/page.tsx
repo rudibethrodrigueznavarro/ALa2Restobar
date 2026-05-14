@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <>
@@ -41,14 +43,20 @@ export default function Home() {
         
         {/* Action Buttons */}
         <div className="w-full flex flex-col gap-md mb-xl">
-          <button className="w-full bg-[#e63946] text-white font-h3 text-h3 py-md rounded-xl glow-red flex items-center justify-center gap-sm transition-transform hover:scale-[1.02] active:scale-95">
+          <Link
+            href="/menu"
+            className="w-full bg-[#e63946] text-white font-h3 text-h3 py-md rounded-xl glow-red flex items-center justify-center gap-sm transition-transform hover:scale-[1.02] active:scale-95"
+          >
             Ver Menú
             <span className="material-symbols-outlined">restaurant_menu</span>
-          </button>
-          <button className="w-full bg-surface-container/50 backdrop-blur-xl border border-white/10 text-on-surface font-h3 text-h3 py-md rounded-xl flex items-center justify-center gap-sm transition-colors hover:bg-surface-container">
+          </Link>
+          <Link
+            href="/menu?seccion=promociones"
+            className="w-full bg-surface-container/50 backdrop-blur-xl border border-white/10 text-on-surface font-h3 text-h3 py-md rounded-xl flex items-center justify-center gap-sm transition-colors hover:bg-surface-container"
+          >
             Promociones
             <span className="material-symbols-outlined">local_offer</span>
-          </button>
+          </Link>
         </div>
       </main>
     </>

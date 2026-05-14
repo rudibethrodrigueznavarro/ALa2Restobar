@@ -9,17 +9,17 @@ export default function AdminDashboard() {
           <span className="material-symbols-outlined text-[24px]">menu</span>
         </button>
         <h1 className="font-h3 text-h3 tracking-tight font-h2 uppercase text-primary dark:text-primary">A LA 2 RESTO-BAR</h1>
-        <button className="text-primary dark:text-primary hover:text-primary transition-colors opacity-100 hover:opacity-80 duration-200 focus:outline-none relative">
+        <Link href="/resumen" className="text-primary dark:text-primary hover:text-primary transition-colors opacity-100 hover:opacity-80 duration-200 focus:outline-none relative">
           <span className="material-symbols-outlined text-[24px]">shopping_cart</span>
           <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary-container rounded-full shadow-[0_0_8px_rgba(255,83,91,0.8)]"></span>
-        </button>
+        </Link>
       </header>
-      
+
       {/* Navigation Drawer (Hidden on mobile) */}
       <aside className="fixed inset-y-0 left-0 z-[60] flex flex-col bg-surface-container-high dark:bg-surface-container-high h-full w-72 rounded-r-xl border-r border-white/5 shadow-xxl transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0">
         <div className="p-lg border-b border-white/5 flex items-center gap-md">
           <div className="w-12 h-12 rounded-full bg-surface-container-lowest border border-white/10 overflow-hidden flex-shrink-0 relative">
-            <img alt="Admin Avatar" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuPehbh94C3yqL4TKcG4SICHRDYaoSNLUh0Km1Kzx3pXM2f2r3HYzjzzC3LqB7k-lajm5ffaNz18M4T67GUz_rYWzqdEuuWhIdrjaIJ_uLAqyuCfe9ETSzuhyXG4fiwPJi1v3bn1pGPDQCw5eRzEGoyQ4_5SCsXGmzoPTHy5PTpZc8qQrySqzne7ItpaoWQnX81JjNd5pNoBLkovSb1UYS8FyLH1X6-bjsHI6i3QotfxDzUDliLbSE-Sf3pYXBQcM4I2YXXXdMOw"/>
+            <img alt="Admin Avatar" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuPehbh94C3yqL4TKcG4SICHRDYaoSNLUh0Km1Kzx3pXM2f2r3HYzjzzC3LqB7k-lajm5ffaNz18M4T67GUz_rYWzqdEuuWhIdrjaIJ_uLAqyuCfe9ETSzuhyXG4fiwPJi1v3bn1pGPDQCw5eRzEGoyQ4_5SCsXGmzoPTHy5PTpZc8qQrySqzne7ItpaoWQnX81JjNd5pNoBLkovSb1UYS8FyLH1X6-bjsHI6i3QotfxDzUDliLbSE-Sf3pYXBQcM4I2YXXXdMOw" />
           </div>
           <div className="flex flex-col">
             <span className="font-h3 text-[18px] text-primary">Admin Panel</span>
@@ -49,7 +49,7 @@ export default function AdminDashboard() {
           </Link>
         </nav>
       </aside>
-      
+
       {/* Main Canvas */}
       <main className="pt-[88px] px-md md:pl-[304px] pb-xl flex flex-col gap-lg max-w-7xl mx-auto w-full">
         {/* Header Section */}
@@ -60,7 +60,7 @@ export default function AdminDashboard() {
             <span className="font-label-caps text-label-caps text-primary-container">Live</span>
           </div>
         </div>
-        
+
         {/* Metrics Bento Grid */}
         <div className="grid grid-cols-2 gap-md">
           {/* Ventas Hoy */}
@@ -75,7 +75,7 @@ export default function AdminDashboard() {
               <span className="font-body-md text-[14px] text-secondary">.50</span>
             </div>
           </div>
-          
+
           {/* Pedidos Activos */}
           <div className="bg-surface/60 backdrop-blur-xl border border-white/10 rounded-xl p-md flex flex-col justify-between relative overflow-hidden">
             <div className="flex items-start justify-between relative z-10 mb-6">
@@ -86,7 +86,7 @@ export default function AdminDashboard() {
               <span className="font-h2 text-[32px] text-on-surface">14</span>
             </div>
           </div>
-          
+
           {/* Productos Agotados */}
           <div className="bg-surface/60 backdrop-blur-xl border border-white/10 border-b-primary-container/30 rounded-xl p-md flex flex-col justify-between relative overflow-hidden shadow-[0_10px_30px_-15px_rgba(255,83,91,0.3)]">
             <div className="absolute top-0 right-0 w-16 h-16 bg-primary-container/10 blur-xl rounded-full translate-x-1/2 -translate-y-1/2"></div>
@@ -99,7 +99,7 @@ export default function AdminDashboard() {
             </div>
           </div>
         </div>
-        
+
         {/* Weekly Sales Chart */}
         <section className="bg-surface/60 backdrop-blur-xl border border-white/10 rounded-xl p-md flex flex-col gap-md relative overflow-hidden">
           <div className="flex items-center justify-between z-10">
@@ -133,12 +133,12 @@ export default function AdminDashboard() {
             <span>DOM</span>
           </div>
         </section>
-        
+
         {/* Recent Orders */}
         <section className="flex flex-col gap-sm">
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-h3 text-[18px] text-on-surface">Últimos Pedidos</h3>
-            <button className="font-label-caps text-label-caps text-primary hover:text-primary-container transition-colors">VER TODOS</button>
+            <Link href="/resumen" className="font-label-caps text-label-caps text-primary hover:text-primary-container transition-colors">VER TODOS</Link>
           </div>
           {/* Order Item 1 */}
           <div className="bg-surface-container/40 hover:bg-surface-container/80 transition-colors border border-white/5 rounded-lg p-sm pr-md flex items-center justify-between group">
