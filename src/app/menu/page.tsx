@@ -33,7 +33,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 1,
       name: "La A La 2 Clásica",
-      price: "$12.50",
+      price: "$12.500",
       description: "Doble carne premium, queso cheddar fundido, tocino crujiente, lechuga fresca, tomate y nuestra salsa secreta de la casa en pan brioche artesanal.",
       img: "https://lh3.googleusercontent.com/aida-public/AB6AXuD4N85gE9YWWqKcTfQrlojXBzEHGWgYfSeansBTg7ZznaQYAGgp7jjH0IN6pBxCYO3DGNnpCBGdrThlf3i4AacjlTNdRtWw5R0--whWz4Vrw6PxJs3Ij0vuuKfqpzV75vuszdEOnZOoTrVXlz2CiaeLaoA98YIwwNC7k3rBYckfS9hp4KJEcBSns6qJ13WGtsLkgqYyeSwabmka38mfaJ6EGhgdNwFq8uem1J1WSw7QWorZYkJDx3bL2vjVgGktr0hDCEXNubLrww",
       imgAlt: "La A La 2 Clásica",
@@ -42,7 +42,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 2,
       name: "Diablo Burger",
-      price: "$14.00",
+      price: "$14.000",
       description: "Carne de res, queso pepper jack, jalapeños rostizados, cebolla caramelizada y aderezo de sriracha picante.",
       img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAngO8Crhti3xkz8nhDCmiFUJUkEFhFYThICWIdnNzk91EmKVptR3FE3Uf_skKMt1OXCqcV1YxRcizUyo27n1d7W03q7YrVTyS1V0aKBiFoSS6pt6BuFO_qF2IRB_BXrbVY2T8OggdbBajn_H5AcVlbZT4SVkjtDFx8b93ILU6P_TFcKFZ59aS4i78Ve4GgXlmOohk6hU5TcsDmf9_6PsAPdjmEYeEE8NlMRP1yrbdzMykxQkbzae4A6byMhLGAqad949L_4eJ71g",
       imgAlt: "Diablo Burger",
@@ -51,7 +51,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 3,
       name: "La Alternativa",
-      price: "$13.50",
+      price: "$13.500",
       description: "Medallón de proteína vegetal crujiente, aguacate fresco, espinaca baby y mayonesa vegana de ajo rostizado.",
       img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCW5mnlEjSxPZvJAjZYLS53GfyFkRXL3DD8ONI3j6b0jG1BRXrRw6vMn7UizjWG9VZsYRXTpMB4OQosMyhzpgRoU4BjBy1qgf2jsGOU73koaK7JjIFkkv0jVgAhH8vRd_r3e4LE-vetueh7f4xjrCye-Lmkq2CRNROrUVy9jzbRVdpmYQTVEEz1P_z_QBNPOzG3vFlOATf--izITZXUBGbACn80hbNjvDjq1KuQXUcMR_WvNeyx67rCTBD6dgeXAkiAS_j4-KeVFA",
       imgAlt: "La Alternativa Vegana",
@@ -62,7 +62,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 4,
       name: "Pizza A La 2",
-      price: "$16.00",
+      price: "$16.000",
       description: "Salsa de tomate artesanal, mozzarella premium, pepperoni importado y albahaca fresca sobre masa de fermentación lenta.",
       img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80",
       imgAlt: "Pizza A La 2",
@@ -71,7 +71,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 5,
       name: "Pizza Cuatro Quesos",
-      price: "$17.50",
+      price: "$17.500",
       description: "Mozzarella, parmesano, gorgonzola y queso de cabra sobre base de crema blanca y orégano fresco.",
       img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80",
       imgAlt: "Pizza Cuatro Quesos",
@@ -79,7 +79,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 6,
       name: "Pizza BBQ Bacon",
-      price: "$18.00",
+      price: "$18.000",
       description: "Salsa BBQ ahumada, pollo a la parrilla, tocino crujiente, cebolla morada y mozzarella derretida.",
       img: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=800&q=80",
       imgAlt: "Pizza BBQ Bacon",
@@ -90,7 +90,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 7,
       name: "Salchipapa Clásica",
-      price: "$7.00",
+      price: "$7.000",
       description: "Papas fritas crocantes con rodajas de salchicha, ketchup, mostaza y mayonesa de la casa.",
       img: "https://images.unsplash.com/photo-1576107232684-1279f390859f?w=800&q=80",
       imgAlt: "Salchipapa Clásica",
@@ -99,7 +99,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 8,
       name: "Salchipapa Especial",
-      price: "$9.50",
+      price: "$9.500",
       description: "Papas crinkle, salchicha premium, queso cheddar fundido, tocineta y jalapeños encurtidos.",
       img: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=800&q=80",
       imgAlt: "Salchipapa Especial",
@@ -108,7 +108,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 9,
       name: "Papas Loaded",
-      price: "$10.00",
+      price: "$10.000",
       description: "Papas gruesas horneadas, queso fundido, crema agria, cebollín y tiras de pollo BBQ.",
       img: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=800&q=80",
       imgAlt: "Papas Loaded",
@@ -118,7 +118,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 10,
       name: "Limonada de Menta",
-      price: "$4.50",
+      price: "$4.500",
       description: "Limón fresco exprimido, menta fresca, jarabe natural y agua con gas. Refrescante y sin azúcar añadida.",
       img: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=800&q=80",
       imgAlt: "Limonada de Menta",
@@ -127,7 +127,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 11,
       name: "Michelada A La 2",
-      price: "$6.00",
+      price: "$6.000",
       description: "Cerveza fría, jugo de tomate, limón, salsa inglesa, salsa picante y chamoy en el borde. La favorita de la casa.",
       img: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=800&q=80",
       imgAlt: "Michelada A La 2",
@@ -136,7 +136,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 12,
       name: "Jugo Natural",
-      price: "$3.50",
+      price: "$3.500",
       description: "Jugos naturales de temporada: mango, maracuyá, mora o naranja. Preparados al momento sin conservantes.",
       img: "https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?w=800&q=80",
       imgAlt: "Jugo Natural",
@@ -146,7 +146,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 13,
       name: "Brownie Caliente",
-      price: "$5.50",
+      price: "$5.500",
       description: "Brownie de chocolate oscuro tibio servido con una bola de helado de vainilla y salsa de caramelo.",
       img: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800&q=80",
       imgAlt: "Brownie Caliente",
@@ -155,7 +155,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 14,
       name: "Helado Artesanal",
-      price: "$4.00",
+      price: "$4.000",
       description: "Tres bolas de helado artesanal. Sabores disponibles: vainilla, chocolate, fresa, mango o maracuyá.",
       img: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&q=80",
       imgAlt: "Helado Artesanal",
@@ -163,7 +163,7 @@ const PRODUCTS: Record<CategoryId, Product[]> = {
     {
       id: 15,
       name: "Cheesecake de Frutos Rojos",
-      price: "$6.50",
+      price: "$6.500",
       description: "Base de galleta, crema de queso suave y coulis de frutos rojos frescos. Sin gluten disponible.",
       img: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
       imgAlt: "Cheesecake",
@@ -183,6 +183,7 @@ const SECTION_TITLES: Record<CategoryId, string> = {
 /* ─── Component ──────────────────────────────────────────────── */
 export default function Menu() {
   const [activeCategory, setActiveCategory] = useState<CategoryId>("burgers");
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const products = PRODUCTS[activeCategory];
   const sectionTitle = SECTION_TITLES[activeCategory];
@@ -251,7 +252,10 @@ export default function Menu() {
           {products.map((product) => (
             <div key={product.id} className="bg-surface-container-high/80 backdrop-blur-md rounded-xl border border-white/5 overflow-hidden flex flex-col relative group">
               {/* Image */}
-              <div className="h-48 w-full relative overflow-hidden bg-surface-dim">
+              <div 
+                className="h-48 w-full relative overflow-hidden bg-surface-dim cursor-pointer"
+                onClick={() => setSelectedProduct(product)}
+              >
                 <img
                   alt={product.imgAlt}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -259,7 +263,7 @@ export default function Menu() {
                 />
                 {/* Badge */}
                 {product.badge && (
-                  <div className="absolute top-sm left-sm flex flex-col gap-xs">
+                  <div className="absolute top-sm left-sm flex flex-col gap-xs" onClick={(e) => e.stopPropagation()}>
                     <span className={`font-label-caps text-label-caps px-sm py-xs rounded-full inline-block ${product.badge.className}`}>
                       {product.badge.label}
                     </span>
@@ -268,6 +272,7 @@ export default function Menu() {
                 {/* 3D Button */}
                 <Link
                   href="/producto/3d"
+                  onClick={(e) => e.stopPropagation()}
                   className="absolute bottom-sm right-sm bg-surface/90 backdrop-blur-md p-sm rounded-full border border-white/20 text-on-surface hover:text-primary hover:border-primary hover:shadow-[0_0_15px_rgba(230,57,70,0.4)] transition-all flex items-center justify-center group/3d z-10"
                 >
                   <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>view_in_ar</span>
@@ -276,24 +281,94 @@ export default function Menu() {
                 <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface-container-high/80 to-transparent"></div>
               </div>
               {/* Info */}
-              <div className="p-md flex flex-col flex-grow">
+              <div 
+                className="p-md flex flex-col flex-grow cursor-pointer transition-colors hover:bg-white/5"
+                onClick={() => setSelectedProduct(product)}
+              >
                 <div className="flex justify-between items-start mb-sm">
                   <h3 className="font-h3 text-h3 text-on-surface leading-tight">{product.name}</h3>
                   <span className="font-h3 text-h3 text-primary whitespace-nowrap">{product.price}</span>
                 </div>
-                <p className="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-md flex-grow">{product.description}</p>
-                <Link
-                  href="/resumen"
-                  className="w-full bg-surface-bright border border-white/10 hover:border-primary text-on-surface hover:text-primary font-label-caps text-label-caps py-md rounded-lg flex items-center justify-center gap-sm transition-all hover:shadow-[0_0_15px_rgba(230,57,70,0.2)]"
-                >
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>add_shopping_cart</span>
-                  AGREGAR
-                </Link>
+                <p className="font-body-md text-body-md text-on-surface-variant mb-md flex-grow line-clamp-2">
+                  {product.description}
+                </p>
+                <div onClick={(e) => e.stopPropagation()}>
+                  <Link
+                    href="/resumen"
+                    className="w-full bg-surface-bright border border-white/10 hover:border-primary text-on-surface hover:text-primary font-label-caps text-label-caps py-md rounded-lg flex items-center justify-center gap-sm transition-all hover:shadow-[0_0_15px_rgba(230,57,70,0.2)]"
+                  >
+                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>add_shopping_cart</span>
+                    AGREGAR
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </main>
+
+      {/* Product Modal */}
+      {selectedProduct && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center px-4 md:px-md bg-background/80 backdrop-blur-sm"
+          onClick={() => setSelectedProduct(null)}
+        >
+          <div
+            className="relative bg-surface-container border border-white/10 rounded-2xl w-full md:max-w-3xl shadow-[0_0_30px_rgba(0,0,0,0.5)] flex flex-col md:flex-row h-[80vh] md:h-[480px]"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedProduct(null)}
+              className="absolute top-3 right-3 bg-black/60 text-white rounded-full p-1 hover:bg-black/80 hover:scale-105 transition-all z-50 border border-white/10 shadow-lg flex items-center justify-center"
+            >
+              <span className="material-symbols-outlined text-[20px]">close</span>
+            </button>
+
+            {/* Product Image */}
+            <div className="relative w-full h-[40%] md:h-full md:w-1/2 shrink-0 overflow-hidden rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+              <img src={selectedProduct.img} alt={selectedProduct.imgAlt} className="w-full h-full object-cover" />
+            </div>
+
+            {/* Product Details */}
+            <div className="flex flex-col w-full md:w-1/2 overflow-y-auto p-5 md:p-8 h-[60%] md:h-full">
+              <div className="flex justify-between items-start mb-3 pr-8">
+                <h2 className="font-h2 text-[20px] md:text-h2 text-on-surface leading-tight">{selectedProduct.name}</h2>
+                <span className="font-h2 text-[20px] md:text-h2 text-primary whitespace-nowrap ml-3">{selectedProduct.price}</span>
+              </div>
+              <p className="text-[14px] md:text-body-lg text-on-surface-variant leading-relaxed mb-4">{selectedProduct.description}</p>
+
+              {/* Observaciones */}
+              <div className="mb-4">
+                <label
+                  htmlFor="product-observations"
+                  className="flex items-center gap-1.5 font-label-caps text-label-caps text-on-surface-variant mb-2 uppercase tracking-wider"
+                >
+                  <span className="material-symbols-outlined text-[16px] text-primary" style={{ fontVariationSettings: "'FILL' 0" }}>edit_note</span>
+                  Observaciones
+                </label>
+                <textarea
+                  id="product-observations"
+                  rows={3}
+                  placeholder="Ej: sin cebolla, extra picante, sin sal…"
+                  className="w-full bg-surface-dim/60 border border-white/10 rounded-xl px-4 py-3 text-[13px] md:text-body-md text-on-surface placeholder:text-on-surface-variant/50 resize-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary focus:shadow-[0_0_12px_rgba(230,57,70,0.25)] transition-all leading-relaxed"
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+
+              <div className="mt-auto flex gap-sm">
+                <Link
+                  href="/resumen"
+                  className="flex-1 bg-primary text-white font-label-caps text-label-caps py-md rounded-xl flex items-center justify-center gap-sm transition-all hover:scale-[1.02] active:scale-95 shadow-[0_0_15px_rgba(230,57,70,0.4)]"
+                >
+                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>shopping_bag</span>
+                  HACER PEDIDO
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Floating Cart Button */}
       <Link
