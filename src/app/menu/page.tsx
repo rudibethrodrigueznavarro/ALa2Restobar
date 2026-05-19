@@ -360,7 +360,7 @@ export default function Menu() {
                   className="flex-1 bg-primary text-white font-label-caps text-label-caps py-md rounded-xl flex items-center justify-center gap-sm transition-all hover:scale-[1.02] active:scale-95 shadow-[0_0_15px_rgba(230,57,70,0.4)]"
                 >
                   <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>shopping_bag</span>
-                  HACER PEDIDO
+                  AGREGAR AL PEDIDO
                 </Link>
               </div>
             </div>
