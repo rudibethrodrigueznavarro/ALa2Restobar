@@ -184,6 +184,12 @@ const SECTION_TITLES: Record<CategoryId, string> = {
 export default function Menu() {
   const [activeCategory, setActiveCategory] = useState<CategoryId>("burgers");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [quantity, setQuantity] = useState(1);
+
+  function openModal(product: Product) {
+    setSelectedProduct(product);
+    setQuantity(1);
+  }
 
   const products = PRODUCTS[activeCategory];
   const sectionTitle = SECTION_TITLES[activeCategory];
@@ -254,7 +260,7 @@ export default function Menu() {
               {/* Image */}
               <div 
                 className="h-48 w-full relative overflow-hidden bg-surface-dim cursor-pointer"
-                onClick={() => setSelectedProduct(product)}
+                onClick={() => openModal(product)}
               >
                 <img
                   alt={product.imgAlt}
@@ -283,7 +289,7 @@ export default function Menu() {
               {/* Info */}
               <div 
                 className="p-md flex flex-col flex-grow cursor-pointer transition-colors hover:bg-white/5"
-                onClick={() => setSelectedProduct(product)}
+                onClick={() => openModal(product)}
               >
                 <div className="flex justify-between items-start mb-sm">
                   <h3 className="font-h3 text-h3 text-on-surface leading-tight">{product.name}</h3>
@@ -293,7 +299,7 @@ export default function Menu() {
                   {product.description}
                 </p>
                 <button
-                  onClick={(e) => { e.stopPropagation(); setSelectedProduct(product); }}
+                  onClick={(e) => { e.stopPropagation(); openModal(product); }}
                   className="w-full bg-surface-bright border border-white/10 hover:border-primary text-on-surface hover:text-primary font-label-caps text-label-caps py-md rounded-lg flex items-center justify-center gap-sm transition-all hover:shadow-[0_0_15px_rgba(230,57,70,0.2)]"
                 >
                   <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>add_shopping_cart</span>
@@ -352,6 +358,31 @@ export default function Menu() {
                   className="w-full bg-surface-dim/60 border border-white/10 rounded-xl px-4 py-3 text-[13px] md:text-body-md text-on-surface placeholder:text-on-surface-variant/50 resize-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary focus:shadow-[0_0_12px_rgba(230,57,70,0.25)] transition-all leading-relaxed"
                   onClick={(e) => e.stopPropagation()}
                 />
+              </div>
+
+              {/* Cantidad */}
+              <div className="mb-4">
+                <span className="flex items-center gap-1.5 font-label-caps text-label-caps text-on-surface-variant mb-2 uppercase tracking-wider">
+                  <span className="material-symbols-outlined text-[16px] text-primary" style={{ fontVariationSettings: "'FILL' 0" }}>production_quantity_limits</span>
+                  Cantidad
+                </span>
+                <div className="flex items-center gap-0 bg-surface-dim/60 border border-white/10 rounded-xl overflow-hidden w-fit">
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setQuantity(q => Math.max(1, q - 1)); }}
+                    className="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all text-xl font-bold"
+                    aria-label="Disminuir cantidad"
+                  >
+                    <span className="material-symbols-outlined text-[20px]">remove</span>
+                  </button>
+                  <span className="w-12 text-center font-h3 text-h3 text-on-surface select-none">{quantity}</span>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setQuantity(q => q + 1); }}
+                    className="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all text-xl font-bold"
+                    aria-label="Aumentar cantidad"
+                  >
+                    <span className="material-symbols-outlined text-[20px]">add</span>
+                  </button>
+                </div>
               </div>
 
               <div className="mt-auto flex gap-sm">
