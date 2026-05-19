@@ -292,15 +292,13 @@ export default function Menu() {
                 <p className="font-body-md text-body-md text-on-surface-variant mb-md flex-grow line-clamp-2">
                   {product.description}
                 </p>
-                <div onClick={(e) => e.stopPropagation()}>
-                  <Link
-                    href="/resumen"
-                    className="w-full bg-surface-bright border border-white/10 hover:border-primary text-on-surface hover:text-primary font-label-caps text-label-caps py-md rounded-lg flex items-center justify-center gap-sm transition-all hover:shadow-[0_0_15px_rgba(230,57,70,0.2)]"
-                  >
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>add_shopping_cart</span>
-                    AGREGAR
-                  </Link>
-                </div>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setSelectedProduct(product); }}
+                  className="w-full bg-surface-bright border border-white/10 hover:border-primary text-on-surface hover:text-primary font-label-caps text-label-caps py-md rounded-lg flex items-center justify-center gap-sm transition-all hover:shadow-[0_0_15px_rgba(230,57,70,0.2)]"
+                >
+                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>add_shopping_cart</span>
+                  AGREGAR
+                </button>
               </div>
             </div>
           ))}
