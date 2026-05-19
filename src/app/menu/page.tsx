@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /* ─── Types ─────────────────────────────────────────────────── */
 type Badge = { label: string; className: string };
+type CartItem = { product: Product; quantity: number; notes: string };
 
 interface Product {
   id: number;
@@ -185,11 +186,46 @@ export default function Menu() {
   const [activeCategory, setActiveCategory] = useState<CategoryId>("burgers");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const [notes, setNotes] = useState("");
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const stored = localStorage.getItem("ala2_cart");
+      return stored ? (JSON.parse(stored) as CartItem[]) : [];
+    } catch {
+      return [];
+    }
+  });
+  const [addedFeedback, setAddedFeedback] = useState(false);
+
+  // Sync cart → localStorage
+  useEffect(() => {
+    localStorage.setItem("ala2_cart", JSON.stringify(cart));
+  }, [cart]);
 
   function openModal(product: Product) {
     setSelectedProduct(product);
     setQuantity(1);
+    setNotes("");
   }
+
+  function addToCart() {
+    if (!selectedProduct) return;
+    setCart(prev => {
+      const existing = prev.findIndex(i => i.product.id === selectedProduct.id);
+      if (existing >= 0) {
+        const next = [...prev];
+        next[existing] = { ...next[existing], quantity: next[existing].quantity + quantity };
+        return next;
+      }
+      return [...prev, { product: selectedProduct, quantity, notes }];
+    });
+    setAddedFeedback(true);
+    setTimeout(() => setAddedFeedback(false), 1500);
+    setSelectedProduct(null);
+  }
+
+  const cartCount = cart.reduce((sum, i) => sum + i.quantity, 0);
 
   const products = PRODUCTS[activeCategory];
   const sectionTitle = SECTION_TITLES[activeCategory];
@@ -204,7 +240,9 @@ export default function Menu() {
         <h1 className="font-h2 text-h2 uppercase tracking-tighter text-primary">A LA 2 RESTO-BAR</h1>
         <Link href="/resumen" className="text-on-surface-variant hover:text-primary transition-colors p-sm rounded-full hover:bg-white/5 relative">
           <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>shopping_cart</span>
-          <span className="absolute top-0 right-0 w-3 h-3 bg-primary rounded-full shadow-[0_0_10px_rgba(230,57,70,0.8)] border border-background"></span>
+          {cartCount > 0 && (
+            <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-primary rounded-full text-white text-[10px] font-bold flex items-center justify-center px-1 shadow-[0_0_10px_rgba(230,57,70,0.8)] border border-background">{cartCount}</span>
+          )}
         </Link>
       </header>
 
@@ -355,6 +393,8 @@ export default function Menu() {
                   id="product-observations"
                   rows={3}
                   placeholder="Ej: sin cebolla, extra picante, sin sal…"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
                   className="w-full bg-surface-dim/60 border border-white/10 rounded-xl px-4 py-3 text-[13px] md:text-body-md text-on-surface placeholder:text-on-surface-variant/50 resize-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary focus:shadow-[0_0_12px_rgba(230,57,70,0.25)] transition-all leading-relaxed"
                   onClick={(e) => e.stopPropagation()}
                 />
@@ -386,13 +426,13 @@ export default function Menu() {
               </div>
 
               <div className="mt-auto flex gap-sm">
-                <Link
-                  href="/resumen"
+                <button
+                  onClick={(e) => { e.stopPropagation(); addToCart(); }}
                   className="flex-1 bg-primary text-white font-label-caps text-label-caps py-md rounded-xl flex items-center justify-center gap-sm transition-all hover:scale-[1.02] active:scale-95 shadow-[0_0_15px_rgba(230,57,70,0.4)]"
                 >
                   <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>shopping_bag</span>
                   AGREGAR AL PEDIDO
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -405,7 +445,9 @@ export default function Menu() {
         className="fixed bottom-24 right-md md:bottom-md md:right-xl bg-primary text-white w-14 h-14 rounded-full flex items-center justify-center shadow-[0_0_25px_rgba(230,57,70,0.6)] hover:scale-105 hover:bg-primary-container transition-all z-40"
       >
         <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>shopping_bag</span>
-        <span className="absolute -top-2 -right-2 bg-white text-primary font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-background">2</span>
+        {cartCount > 0 && (
+          <span className="absolute -top-2 -right-2 bg-white text-primary font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-background">{cartCount}</span>
+        )}
       </Link>
 
       {/* BottomNavBar (Mobile Only) */}
