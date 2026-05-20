@@ -364,7 +364,7 @@ export default function InventarioAdmin() {
                   <div className="grid grid-cols-2 gap-md">
                     {/* Imagen */}
                     <div className="flex flex-col gap-xs">
-                      <span className="font-label-caps text-[10px] text-on-surface-variant/60 px-1">
+                      <span className="font-label-caps text-[10px] text-on-surface-variant/60 px-1 h-5 flex items-center">
                         Imagen del plato
                       </span>
                       <div
@@ -396,7 +396,7 @@ export default function InventarioAdmin() {
 
                     {/* Modelo 3D */}
                     <div className="flex flex-col gap-xs">
-                      <span className="font-label-caps text-[10px] text-primary/70 px-1 flex items-center gap-1">
+                      <span className="font-label-caps text-[10px] text-primary/70 px-1 h-5 flex items-center gap-1">
                         <span className="material-symbols-outlined text-[12px]">view_in_ar</span>
                         Modelo 3D (GLB)
                       </span>
@@ -464,7 +464,7 @@ export default function InventarioAdmin() {
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src =
-                      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop";
+                      "/placeholder-food.svg";
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -573,7 +573,7 @@ export default function InventarioAdmin() {
 
           {/* ── DELETE CONFIRMATION MODAL ────────────────────────── */}
           {modalMode === "delete" && selectedProduct && (
-            <div className="bg-surface-container-high border border-white/10 rounded-2xl w-full max-w-sm shadow-2xl p-lg flex flex-col gap-lg">
+            <div className="bg-surface-container-high border border-white/10 rounded-2xl w-full max-w-md shadow-2xl p-lg flex flex-col gap-lg">
               <div className="flex flex-col items-center text-center gap-md">
                 <div className="w-16 h-16 rounded-full bg-error/10 border border-error/20 flex items-center justify-center">
                   <span className="material-symbols-outlined text-error text-[34px]">delete_forever</span>
@@ -768,7 +768,7 @@ export default function InventarioAdmin() {
                     alt={product.name}
                     onError={(e) => {
                       (e.target as HTMLImageElement).src =
-                        "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&auto=format&fit=crop";
+                        "/placeholder-food.svg";
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />

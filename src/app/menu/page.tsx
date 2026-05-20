@@ -397,7 +397,7 @@ export default function Menu() {
                       src={product.img}
                       onError={(e) => {
                         (e.target as HTMLImageElement).src =
-                          "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&auto=format&fit=crop";
+                          "/placeholder-food.svg";
                       }}
                     />
                     {/* 3D Button */}
@@ -492,14 +492,16 @@ export default function Menu() {
             })}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center text-center py-20 px-md bg-surface-container-high/40 border border-white/5 rounded-2xl mb-xxl backdrop-blur-md">
-            <span className="material-symbols-outlined text-[64px] text-on-surface-variant/40 mb-md select-none">
+          <div className="flex flex-col items-center justify-center text-center py-16 px-lg bg-surface-container-high/40 border border-white/5 rounded-2xl mb-xxl backdrop-blur-md gap-sm">
+            <span className="material-symbols-outlined text-[52px] text-on-surface-variant/30 select-none">
               search_off
             </span>
-            <h3 className="font-h3 text-h3 text-on-surface mb-xs">No se encontraron productos</h3>
-            <p className="font-body-md text-body-md text-on-surface-variant max-w-sm">
-              No hallamos ningún platillo o bebida en esta sección.
-            </p>
+            <div className="flex flex-col gap-xs">
+              <h3 className="font-semibold text-[17px] text-on-surface leading-tight">No se encontraron productos</h3>
+              <p className="font-body-md text-[13px] text-on-surface-variant/70 leading-relaxed">
+                No hay platillos ni bebidas en esta sección.
+              </p>
+            </div>
           </div>
         )}
       </main>
@@ -532,7 +534,7 @@ export default function Menu() {
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src =
-                      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop";
+                      "/placeholder-food.svg";
                   }}
                 />
               </div>

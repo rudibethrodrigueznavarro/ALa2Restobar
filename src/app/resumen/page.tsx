@@ -302,7 +302,7 @@ export default function Resumen() {
                     src={item.product.img}
                     onError={(e) => {
                       (e.target as HTMLImageElement).src =
-                        "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=120&auto=format&fit=crop";
+                        "/placeholder-food.svg";
                     }}
                   />
                 </div>
