@@ -455,7 +455,7 @@ export default function InventarioAdmin() {
 
           {/* ── VIEW MODAL ───────────────────────────────────────── */}
           {modalMode === "view" && selectedProduct && (
-            <div className="bg-surface-container-high border border-white/10 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
+            <div className="bg-surface-container-high border border-white/10 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden">
               {/* Image hero */}
               <div className="relative h-52 bg-surface-variant overflow-hidden">
                 <img
