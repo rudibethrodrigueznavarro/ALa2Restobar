@@ -37,9 +37,9 @@ export async function POST(req: NextRequest) {
       url: relativeUrl,
     });
   } catch (error: any) {
-    console.error("Upload error:", error);
+    console.error("Upload error:", error?.message, error?.code, error?.name);
     return NextResponse.json(
-      { error: "Error al subir el archivo al almacenamiento" },
+      { error: "Error al subir el archivo al almacenamiento", detail: error?.message },
       { status: 500 }
     );
   }
