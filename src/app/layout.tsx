@@ -33,7 +33,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-background text-on-background min-h-screen flex flex-col items-center justify-center relative overflow-x-hidden">
+      <body className="bg-background text-on-background min-h-screen relative overflow-x-hidden">
         {children}
       </body>
     </html>

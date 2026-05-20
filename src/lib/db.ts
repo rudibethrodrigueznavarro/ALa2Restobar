@@ -23,6 +23,8 @@ export const query = async (text: string, params?: any[]) => {
   return res;
 };
 
+export { pool };
+
 // Declaración para mantener el pool en dev y que no se creen múltiples conexiones por HMR
 declare global {
   var pgPool: Pool | undefined;
