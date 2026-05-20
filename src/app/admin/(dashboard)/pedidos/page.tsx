@@ -390,4 +390,4 @@ export default function PedidosAdmin() {
     </div>
   );
 }
-export const runtime = "nodejs";
+export const dynamic = 'force-dynamic';

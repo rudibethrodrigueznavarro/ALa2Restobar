@@ -265,4 +265,4 @@ export default function CategoriasAdmin() {
     </div>
   );
 }
-export const runtime = "nodejs";
+export const dynamic = 'force-dynamic';

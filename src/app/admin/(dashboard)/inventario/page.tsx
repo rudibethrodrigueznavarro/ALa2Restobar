@@ -507,4 +507,4 @@ export default function InventarioAdmin() {
     </div>
   );
 }
-export const runtime = "nodejs";
+export const dynamic = 'force-dynamic';
