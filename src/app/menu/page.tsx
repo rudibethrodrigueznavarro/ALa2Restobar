@@ -599,7 +599,7 @@ export default function Menu() {
 
                   <button
                     onClick={addToCart}
-                    className="flex-grow h-12 bg-primary text-white font-label-caps text-[14px] font-bold tracking-wider rounded-xl shadow-[0_0_15px_rgba(230,57,70,0.3)] hover:shadow-[0_0_20px_rgba(230,57,70,0.5)] transition-all hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-sm cursor-pointer"
+                    className="flex-grow h-12 bg-emerald-600 hover:bg-emerald-500 text-white font-label-caps text-[14px] font-bold tracking-wider rounded-xl border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-sm cursor-pointer"
                   >
                     <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>
                       shopping_bag
