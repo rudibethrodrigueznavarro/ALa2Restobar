@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-background text-on-background flex flex-col items-center justify-center gap-md px-md text-center">
@@ -8,12 +6,12 @@ export default function NotFound() {
       <p className="font-body-md text-body-md text-on-surface-variant max-w-sm">
         La página que buscas no existe o fue movida.
       </p>
-      <Link
+      <a
         href="/"
         className="mt-md px-lg py-sm bg-primary text-white rounded-xl font-label-caps text-label-caps hover:bg-primary/90 transition-colors"
       >
         Volver al inicio
-      </Link>
+      </a>
     </div>
   );
 }
