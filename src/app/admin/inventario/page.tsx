@@ -149,7 +149,7 @@ export default function InventarioAdmin() {
       </button>
 
       {/* BottomNavBar */}
-      <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-sm px-gutter bg-surface-container/90 dark:bg-surface-container/90 backdrop-blur-xl border-t border-white/10 rounded-t-xl shadow-[0_-5px_25px_rgba(0,0,0,0.5)] md:hidden">
+      <nav className="fixed bottom-0 left-0 w-full z-50 grid grid-cols-4 items-center py-sm bg-surface-container/90 dark:bg-surface-container/90 backdrop-blur-xl border-t border-white/10 rounded-t-xl shadow-[0_-5px_25px_rgba(0,0,0,0.5)] md:hidden">
         <Link href="/menu" className="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-container transition-all">
           <span className="material-symbols-outlined">restaurant_menu</span>
           <span className="font-label-caps text-label-caps mt-1">Menu</span>

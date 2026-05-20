@@ -3,32 +3,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-/* ─── Types ─────────────────────────────────────────────────── */
-interface Product {
-  id: number;
-  name: string;
-  price: string;
-  description: string;
-  img: string;
-  imgAlt: string;
-}
-
-interface CartItem {
-  product: Product;
-  quantity: number;
-  notes: string;
-}
-
-/* ─── Helpers ────────────────────────────────────────────────── */
-/** Convierte "$12.500" → 12500 */
-function parsePrice(price: string): number {
-  return Number(price.replace(/\$|\./g, "").replace(",", "."));
-}
-
-/** Formatea número → "$12.500" */
-function formatPrice(n: number): string {
-  return "$" + n.toLocaleString("es-CO");
-}
+import {
+  deserializeCart,
+  serializeCart,
+  parsePrice,
+  formatPrice,
+  type Product,
+  type CartItem
+} from "../data/products";
 
 /* ─── Component ──────────────────────────────────────────────── */
 export default function Resumen() {
@@ -41,7 +23,7 @@ export default function Resumen() {
   useEffect(() => {
     try {
       const stored = localStorage.getItem("ala2_cart");
-      if (stored) setCart(JSON.parse(stored) as CartItem[]);
+      if (stored) setCart(deserializeCart(stored));
     } catch {
       /* ignore */
     }
@@ -51,7 +33,7 @@ export default function Resumen() {
   /* Persistir carrito en localStorage en cada cambio */
   useEffect(() => {
     if (!mounted) return;
-    localStorage.setItem("ala2_cart", JSON.stringify(cart));
+    localStorage.setItem("ala2_cart", serializeCart(cart));
   }, [cart, mounted]);
 
   /* ── Handlers ── */
@@ -82,6 +64,28 @@ export default function Resumen() {
   /* ── WhatsApp ── */
   function handleWhatsApp() {
     if (cart.length === 0) return;
+
+    // Guardar en el historial de pedidos de este dispositivo
+    try {
+      const stored = localStorage.getItem("ala2_order_history");
+      const history = stored ? JSON.parse(stored) : [];
+      const newOrder = {
+        id: `order-${Date.now()}`,
+        timestamp: Date.now(),
+        type: orderType,
+        observations: observations,
+        items: cart.map(item => ({
+          productId: item.product.id,
+          quantity: item.quantity,
+          notes: item.notes
+        }))
+      };
+      history.unshift(newOrder);
+      localStorage.setItem("ala2_order_history", JSON.stringify(history));
+    } catch (e) {
+      console.error("Error saving order history", e);
+    }
+
     const lines = cart.map(
       item =>
         `• ${item.quantity}x ${item.product.name} — ${formatPrice(
