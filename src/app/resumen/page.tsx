@@ -77,7 +77,7 @@ export default function Resumen() {
                     price: formatPrice(Number(found.price)),
                     rawPrice: Number(found.price),
                     description: found.description,
-                    img: found.image_url || "/placeholder-food.png",
+                    img: found.image_url || "/placeholder-food.svg",
                     imgAlt: found.name,
                   },
                   quantity: item.quantity || 1,

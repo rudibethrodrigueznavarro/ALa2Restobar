@@ -95,7 +95,7 @@ export default function Menu() {
               price: formatPrice(Number(p.price)),
               rawPrice: Number(p.price),
               description: p.description,
-              img: p.image_url || "/placeholder-food.png",
+              img: p.image_url || "/placeholder-food.svg",
               imgAlt: p.name,
               category_id: p.category_id,
               model_3d_url: p.model_3d_url,

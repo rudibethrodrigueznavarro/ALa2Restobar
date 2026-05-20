@@ -459,7 +459,7 @@ export default function InventarioAdmin() {
               {/* Image hero */}
               <div className="relative h-52 bg-surface-variant overflow-hidden">
                 <img
-                  src={selectedProduct.image_url || "/placeholder-food.png"}
+                  src={selectedProduct.image_url || "/placeholder-food.svg"}
                   alt={selectedProduct.name}
                   className="w-full h-full object-cover"
                   onError={(e) => {
@@ -764,7 +764,7 @@ export default function InventarioAdmin() {
                 >
                   <img
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    src={product.image_url || "/placeholder-food.png"}
+                    src={product.image_url || "/placeholder-food.svg"}
                     alt={product.name}
                     onError={(e) => {
                       (e.target as HTMLImageElement).src =
