@@ -56,166 +56,391 @@ export function serializeCart(cart: CartItem[]): string {
 
 /* ─── Category definitions ───────────────────────────────────── */
 export const CATEGORIES = [
-  { id: "burgers",     label: "Burgers",     icon: "lunch_dining" },
-  { id: "pizzas",      label: "Pizzas",      icon: "local_pizza"  },
-  { id: "salchipapas", label: "Salchipapas", icon: "fastfood"     },
-  { id: "bebidas",     label: "Bebidas",     icon: "local_drink"  },
-  { id: "postres",     label: "Postres",     icon: "icecream"     },
+  { id: "entradas",          label: "Entradas",          icon: "restaurant" },
+  { id: "burgers",           label: "Hamburguesas",      icon: "lunch_dining" },
+  { id: "patacones",         label: "Patacones",         icon: "restaurant" },
+  { id: "salchipapas",       label: "Salchipapas",       icon: "fastfood" },
+  { id: "asados",            label: "Asados",            icon: "restaurant" },
+  { id: "burritos",          label: "Burritos",          icon: "restaurant" },
+  { id: "perros",            label: "Perros",            icon: "restaurant" },
+  { id: "desgranados",       label: "Desgranados",       icon: "restaurant" },
+  { id: "alitas",            label: "Alitas BBQ",        icon: "restaurant" },
+  { id: "bebidas",           label: "Bebidas",           icon: "local_drink" },
+  { id: "micheladas",        label: "Micheladas",        icon: "local_bar" },
+  { id: "sodas_saborizadas", label: "Sodas",             icon: "local_drink" },
+  { id: "cervezas",          label: "Cervezas",          icon: "sports_bar" },
+  { id: "adicionales",       label: "Adicionales",       icon: "add_circle" },
 ] as const;
 
 export type CategoryId = (typeof CATEGORIES)[number]["id"];
 
 /* ─── Mock product data ──────────────────────────────────────── */
 export const PRODUCTS: Record<CategoryId, Product[]> = {
-  burgers: [
+  entradas: [
     {
       id: 1,
-      name: "La A La 2 Clásica",
-      price: "$12.500",
-      description: "Doble carne premium, queso cheddar fundido, tocino crujiente, lechuga fresca, tomate y nuestra salsa secreta de la casa en pan brioche artesanal.",
-      img: "https://lh3.googleusercontent.com/aida-public/AB6AXuD4N85gE9YWWqKcTfQrlojXBzEHGWgYfSeansBTg7ZznaQYAGgp7jjH0IN6pBxCYO3DGNnpCBGdrThlf3i4AacjlTNdRtWw5R0--whWz4Vrw6PxJs3Ij0vuuKfqpzV75vuszdEOnZOoTrVXlz2CiaeLaoA98YIwwNC7k3rBYckfS9hp4KJEcBSns6qJ13WGtsLkgqYyeSwabmka38mfaJ6EGhgdNwFq8uem1J1WSw7QWorZYkJDx3bL2vjVgGktr0hDCEXNubLrww",
-      imgAlt: "La A La 2 Clásica",
-      badge: { label: "MÁS VENDIDO", className: "bg-primary text-on-primary shadow-[0_0_10px_rgba(230,57,70,0.5)]" },
-    },
+      name: "Croquetas de yuca con suero y queso costeño",
+      price: "$10.000",
+      description: "Croquetas crujientes de yuca acompañadas con suero costeño artesanal y queso costeño rallado.",
+      img: "/api/media?key=products/entradas/croquetas_yuca.jpg",
+      imgAlt: "Croquetas de yuca con suero y queso costeño"
+    }
+  ],
+  burgers: [
     {
       id: 2,
-      name: "Diablo Burger",
-      price: "$14.000",
-      description: "Carne de res, queso pepper jack, jalapeños rostizados, cebolla caramelizada y aderezo de sriracha picante.",
-      img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAngO8Crhti3xkz8nhDCmiFUJUkEFhFYThICWIdnNzk91EmKVptR3FE3Uf_skKMt1OXCqcV1YxRcizUyo27n1d7W03q7YrVTyS1V0aKBiFoSS6pt6BuFO_qF2IRB_BXrbVY2T8OggdbBajn_H5AcVlbZT4SVkjtDFx8b93ILU6P_TFcKFZ59aS4i78Ve4GgXlmOohk6hU5TcsDmf9_6PsAPdjmEYeEE8NlMRP1yrbdzMykxQkbzae4A6byMhLGAqad949L_4eJ71g",
-      imgAlt: "Diablo Burger",
-      badge: { label: "PICANTE", className: "bg-error text-on-error shadow-[0_0_10px_rgba(255,180,171,0.3)]" },
+      name: "Hamburguesa tradicional",
+      price: "$15.000",
+      description: "Pan, carne de res 150g, jamón, queso mozarella, vegetales, cebolla caramelizada y papa francesa.",
+      img: "/api/media?key=products/hamburguesas/tradicional.jpg",
+      imgAlt: "Hamburguesa tradicional"
     },
     {
       id: 3,
-      name: "La Alternativa",
-      price: "$13.500",
-      description: "Medallón de proteína vegetal crujiente, aguacate fresco, espinaca baby y mayonesa vegana de ajo rostizado.",
-      img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCW5mnlEjSxPZvJAjZYLS53GfyFkRXL3DD8ONI3j6b0jG1BRXrRw6vMn7UizjWG9VZsYRXTpMB4OQosMyhzpgRoU4BjBy1qgf2jsGOU73koaK7JjIFkkv0jVgAhH8vRd_r3e4LE-vetueh7f4xjrCye-Lmkq2CRNROrUVy9jzbRVdpmYQTVEEz1P_z_QBNPOzG3vFlOATf--izITZXUBGbACn80hbNjvDjq1KuQXUcMR_WvNeyx67rCTBD6dgeXAkiAS_j4-KeVFA",
-      imgAlt: "La Alternativa Vegana",
-      badge: { label: "VEGANO", className: "bg-tertiary-fixed text-on-tertiary-fixed" },
+      name: "Hamburguesa smash",
+      price: "$15.000",
+      description: "Pan, doble carne de res 70g, tocineta, queso cheddar, vegetales y papa francesa.",
+      img: "/api/media?key=products/hamburguesas/smash.jpg",
+      imgAlt: "Hamburguesa smash"
     },
-  ],
-  pizzas: [
     {
       id: 4,
-      name: "Pizza A La 2",
-      price: "$16.000",
-      description: "Salsa de tomate artesanal, mozzarella premium, pepperoni importado y albahaca fresca sobre masa de fermentación lenta.",
-      img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80",
-      imgAlt: "Pizza A La 2",
-      badge: { label: "ESPECIAL", className: "bg-primary text-on-primary shadow-[0_0_10px_rgba(230,57,70,0.5)]" },
+      name: "Hamburguesa doble carne",
+      price: "$22.000",
+      description: "Pan, doble carne de res 150g, tocineta, queso mozarella, queso cheddar, cebolla caramelizada y papa francesa.",
+      img: "/api/media?key=products/hamburguesas/doble_carne.jpg",
+      imgAlt: "Hamburguesa doble carne"
     },
     {
       id: 5,
-      name: "Pizza Cuatro Quesos",
-      price: "$17.500",
-      description: "Mozzarella, parmesano, gorgonzola y queso de cabra sobre base de crema blanca y orégano fresco.",
-      img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80",
-      imgAlt: "Pizza Cuatro Quesos",
+      name: "Hamburguesa de la casa",
+      price: "$20.000",
+      description: "Pan, carne de res 150g, pollo, tocineta, queso mozarella, cebolla caramelizada, vegetales y papa francesa.",
+      img: "/api/media?key=products/hamburguesas/de_la_casa.jpg",
+      imgAlt: "Hamburguesa de la casa"
     },
     {
       id: 6,
-      name: "Pizza BBQ Bacon",
+      name: "Hamburguesa hawaiana",
       price: "$18.000",
-      description: "Salsa BBQ ahumada, pollo a la parrilla, tocino crujiente, cebolla morada y mozzarella derretida.",
-      img: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=800&q=80",
-      imgAlt: "Pizza BBQ Bacon",
-      badge: { label: "POPULAR", className: "bg-secondary text-on-secondary" },
-    },
+      description: "Pan, carne de res 150g, jamón, queso asado, cebolla caramelizada, vegetales y papa francesa.",
+      img: "/api/media?key=products/hamburguesas/hawaiana.jpg",
+      imgAlt: "Hamburguesa hawaiana"
+    }
   ],
-  salchipapas: [
+  patacones: [
     {
       id: 7,
-      name: "Salchipapa Clásica",
-      price: "$7.000",
-      description: "Papas fritas crocantes con rodajas de salchicha, ketchup, mostaza y mayonesa de la casa.",
-      img: "https://images.unsplash.com/photo-1576107232684-1279f390859f?w=800&q=80",
-      imgAlt: "Salchipapa Clásica",
-      badge: { label: "MÁS VENDIDO", className: "bg-primary text-on-primary shadow-[0_0_10px_rgba(230,57,70,0.5)]" },
+      name: "Patacon sencillo",
+      price: "$12.000",
+      description: "Patacón crujiente de plátano verde grande con ajo, sal y mantequilla.",
+      img: "/api/media?key=products/patacones/sencillo.jpg",
+      imgAlt: "Patacon sencillo"
     },
     {
       id: 8,
-      name: "Salchipapa Especial",
-      price: "$9.500",
-      description: "Papas crinkle, salchicha premium, queso cheddar fundido, tocineta y jalapeños encurtidos.",
-      img: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=800&q=80",
-      imgAlt: "Salchipapa Especial",
-      badge: { label: "PICANTE", className: "bg-error text-on-error shadow-[0_0_10px_rgba(255,180,171,0.3)]" },
-    },
+      name: "Patacón especial",
+      price: "$18.000",
+      description: "Patacón de plátano verde crujiente cubierto con carne desmechada, pollo, queso rallado y salsas de la casa.",
+      img: "/api/media?key=products/patacones/especial.jpg",
+      imgAlt: "Patacón especial"
+    }
+  ],
+  salchipapas: [
     {
       id: 9,
-      name: "Papas Loaded",
-      price: "$10.000",
-      description: "Papas gruesas horneadas, queso fundido, crema agria, cebollín y tiras de pollo BBQ.",
-      img: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=800&q=80",
-      imgAlt: "Papas Loaded",
+      name: "Salchipapa tradicional",
+      price: "$12.000",
+      description: "Papa francesa, salchicha, lechuga, queso costeño y salsas de la casa.",
+      img: "/api/media?key=products/salchipapas/tradicional.jpg",
+      imgAlt: "Salchipapa tradicional"
     },
-  ],
-  bebidas: [
     {
       id: 10,
-      name: "Limonada de Menta",
-      price: "$4.500",
-      description: "Limón fresco exprimido, menta fresca, jarabe natural y agua con gas. Refrescante y sin azúcar añadida.",
-      img: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=800&q=80",
-      imgAlt: "Limonada de Menta",
-      badge: { label: "SIN AZÚCAR", className: "bg-tertiary-fixed text-on-tertiary-fixed" },
+      name: "Salchipapa especial",
+      price: "$18.000",
+      description: "Papa francesa, salchicha, butifarra, chorizo, carnes, tocineta, maíz, queso costeño, lechuga y salsas de la casa.",
+      img: "/api/media?key=products/salchipapas/especial.jpg",
+      imgAlt: "Salchipapa especial"
     },
     {
       id: 11,
-      name: "Michelada A La 2",
-      price: "$6.000",
-      description: "Cerveza fría, jugo de tomate, limón, salsa inglesa, salsa picante y chamoy en el borde. La favorita de la casa.",
-      img: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=800&q=80",
-      imgAlt: "Michelada A La 2",
-      badge: { label: "ESPECIAL", className: "bg-primary text-on-primary shadow-[0_0_10px_rgba(230,57,70,0.5)]" },
+      name: "Salchipapa ranchera",
+      price: "$17.000",
+      description: "Papa francesa, salchicha ranchera, tocineta, queso fundido, maíz, lechuga y salsas de la casa.",
+      img: "/api/media?key=products/salchipapas/ranchera.jpg",
+      imgAlt: "Salchipapa ranchera"
     },
     {
       id: 12,
-      name: "Jugo Natural",
-      price: "$3.500",
-      description: "Jugos naturales de temporada: mango, maracuyá, mora o naranja. Preparados al momento sin conservantes.",
-      img: "https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?w=800&q=80",
-      imgAlt: "Jugo Natural",
-    },
+      name: "Salvajada para 2",
+      price: "$32.000",
+      description: "Papa francesa, salchicha, chorizo, tocineta, carnes de res, pollo y cerdo, queso costeño, lechuga y maíz.",
+      img: "/api/media?key=products/salchipapas/salvajada_para_2.jpg",
+      imgAlt: "Salvajada para 2"
+    }
   ],
-  postres: [
+  asados: [
     {
       id: 13,
-      name: "Brownie Caliente",
-      price: "$5.500",
-      description: "Brownie de chocolate oscuro tibio servido con una bola de helado de vainilla y salsa de caramelo.",
-      img: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800&q=80",
-      imgAlt: "Brownie Caliente",
-      badge: { label: "FAVORITO", className: "bg-primary text-on-primary shadow-[0_0_10px_rgba(230,57,70,0.5)]" },
+      name: "Punta de anca",
+      price: "$22.000",
+      description: "Corte premium de punta de anca de res a la parrilla, acompañada con papas fritas y ensalada fresca.",
+      img: "/api/media?key=products/asados/punta_anca.jpg",
+      imgAlt: "Punta de anca"
     },
     {
       id: 14,
-      name: "Helado Artesanal",
-      price: "$4.000",
-      description: "Tres bolas de helado artesanal. Sabores disponibles: vainilla, chocolate, fresa, mango o maracuyá.",
-      img: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&q=80",
-      imgAlt: "Helado Artesanal",
+      name: "Pechuga asada",
+      price: "$18.000",
+      description: "Filete de pechuga de pollo a la plancha, sazonado al gusto y acompañado con papas fritas.",
+      img: "/api/media?key=products/asados/pechuga_asada.jpg",
+      imgAlt: "Pechuga asada"
     },
     {
       id: 15,
-      name: "Cheesecake de Frutos Rojos",
-      price: "$6.500",
-      description: "Base de galleta, crema de queso suave y coulis de frutos rojos frescos. Sin gluten disponible.",
-      img: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
-      imgAlt: "Cheesecake",
-      badge: { label: "VEGANO", className: "bg-tertiary-fixed text-on-tertiary-fixed" },
+      name: "Pechuga gratinada",
+      price: "$20.000",
+      description: "Pechuga de pollo jugosa a la plancha gratinada con abundante queso mozzarella, servida con papas.",
+      img: "/api/media?key=products/asados/pechuga_gratinada.jpg",
+      imgAlt: "Pechuga gratinada"
     },
+    {
+      id: 16,
+      name: "Cerdo a la plancha",
+      price: "$18.000",
+      description: "Lomo de cerdo jugoso asado a la plancha con condimentos del chef, servido con papas.",
+      img: "/api/media?key=products/asados/cerdo_plancha.jpg",
+      imgAlt: "Cerdo a la plancha"
+    },
+    {
+      id: 17,
+      name: "Cerdo gratinado",
+      price: "$20.000",
+      description: "Lomo de cerdo asado a la plancha y gratinado con queso mozzarella fundido, servido con papas.",
+      img: "/api/media?key=products/asados/cerdo_gratinado.jpg",
+      imgAlt: "Cerdo gratinado"
+    }
   ],
+  burritos: [
+    {
+      id: 18,
+      name: "Burrito especial",
+      price: "$15.000",
+      description: "Tortilla de trigo gigante, carne desmechada, pechuga, jamón, quesillo y salsa de la casa, acompañado con papa francesa.",
+      img: "/api/media?key=products/burrito/especial.jpg",
+      imgAlt: "Burrito especial"
+    }
+  ],
+  perros: [
+    {
+      id: 19,
+      name: "Perro tradicional",
+      price: "$10.000",
+      description: "Pan suave, salchicha, papa ripio crujiente, queso mozzarella fundido, vegetales y salsa de la casa, acompañado con papa francesa.",
+      img: "/api/media?key=products/perros/tradicional.jpg",
+      imgAlt: "Perro tradicional"
+    },
+    {
+      id: 20,
+      name: "Perro hawaiano",
+      price: "$15.000",
+      description: "Pan suave, salchicha, papa ripio, queso mozzarella, queso costeño rallado, dulce piña y salsa de la casa, con papas francesas.",
+      img: "/api/media?key=products/perros/hawaiano.jpg",
+      imgAlt: "Perro hawaiano"
+    }
+  ],
+  desgranados: [
+    {
+      id: 21,
+      name: "Desgranado",
+      price: "$20.000",
+      description: "Maíz tierno desgranado con carnes mixtas (pollo, res, tocineta), queso costeño rallado, papa ripio y salsas.",
+      img: "/api/media?key=products/desgranado/desgranado.jpg",
+      imgAlt: "Desgranado"
+    }
+  ],
+  alitas: [
+    {
+      id: 22,
+      name: "Alitas BBQ",
+      price: "$14.000",
+      description: "Porción de alitas de pollo crocantes bañadas en una salsa BBQ tradicional especial de la casa.",
+      img: "/api/media?key=products/alitas/alitas_bbq.jpg",
+      imgAlt: "Alitas BBQ"
+    }
+  ],
+  bebidas: [
+    {
+      id: 23,
+      name: "Coca-cola 1.5 L",
+      price: "$6.500",
+      description: "Gaseosa Coca-Cola tamaño familiar de 1.5 Litros.",
+      img: "/api/media?key=products/bebidas/cocacola_15l.jpg",
+      imgAlt: "Coca-cola 1.5 L"
+    },
+    {
+      id: 24,
+      name: "Postobon 2.5 L",
+      price: "$6.000",
+      description: "Gaseosa Postobón de 2.5 Litros (sabores variados según disponibilidad).",
+      img: "/api/media?key=products/bebidas/postobon_25l.jpg",
+      imgAlt: "Postobon 2.5 L"
+    },
+    {
+      id: 25,
+      name: "Coca-cola 400 ml",
+      price: "$3.500",
+      description: "Gaseosa Coca-Cola personal de 400 ml.",
+      img: "/api/media?key=products/bebidas/cocacola_400ml.jpg",
+      imgAlt: "Coca-cola 400 ml"
+    },
+    {
+      id: 26,
+      name: "Jugo hit 500 ml",
+      price: "$3.500",
+      description: "Jugo Hit de 500 ml en botella (mango, lulo o mora).",
+      img: "/api/media?key=products/bebidas/jugo_hit_500ml.jpg",
+      imgAlt: "Jugo hit 500 ml"
+    },
+    {
+      id: 27,
+      name: "Agua brisa",
+      price: "$2.000",
+      description: "Botella de agua mineral Brisa de 500 ml (con o sin gas).",
+      img: "/api/media?key=products/bebidas/agua_brisa.jpg",
+      imgAlt: "Agua brisa"
+    },
+    {
+      id: 28,
+      name: "Soda",
+      price: "$3.000",
+      description: "Bebida gaseosa sin sabor tipo Soda / Agua con gas.",
+      img: "/api/media?key=products/bebidas/soda.jpg",
+      imgAlt: "Soda"
+    }
+  ],
+  micheladas: [
+    {
+      id: 29,
+      name: "Michelada frutal",
+      price: "$10.000",
+      description: "Bebida refrescante michelada saborizada con extracto y trozos de frutas frescas.",
+      img: "/api/media?key=products/micheladas/frutal.jpg",
+      imgAlt: "Michelada frutal"
+    },
+    {
+      id: 30,
+      name: "Michelada de maracuyá",
+      price: "$8.000",
+      description: "Bebida refrescante michelada con pulpa y semillas de maracuyá fresco, limón y sal.",
+      img: "/api/media?key=products/micheladas/maracuya.jpg",
+      imgAlt: "Michelada de maracuyá"
+    }
+  ],
+  sodas_saborizadas: [
+    {
+      id: 31,
+      name: "Limón",
+      price: "$7.000",
+      description: "Soda burbujeante saborizada con jarabe concentrado de limón natural.",
+      img: "/api/media?key=products/sodas_saborizadas/limon.jpg",
+      imgAlt: "Limón"
+    },
+    {
+      id: 32,
+      name: "Maracuyá",
+      price: "$7.000",
+      description: "Soda burbujeante saborizada con concentrado natural de maracuyá.",
+      img: "/api/media?key=products/sodas_saborizadas/maracuya.jpg",
+      imgAlt: "Maracuyá"
+    },
+    {
+      id: 33,
+      name: "Cereza",
+      price: "$7.000",
+      description: "Soda burbujeante saborizada con almíbar artesanal de cereza y decoración.",
+      img: "/api/media?key=products/sodas_saborizadas/cereza.jpg",
+      imgAlt: "Cereza"
+    }
+  ],
+  cervezas: [
+    {
+      id: 34,
+      name: "Aguila original",
+      price: "$4.000",
+      description: "Cerveza nacional Club Colombia / Águila en botella de vidrio de 330 ml.",
+      img: "/api/media?key=products/cervezas/aguila.jpg",
+      imgAlt: "Aguila original"
+    },
+    {
+      id: 35,
+      name: "Heineken",
+      price: "$4.000",
+      description: "Cerveza Heineken premium de importación fría en botella.",
+      img: "/api/media?key=products/cervezas/heineken.jpg",
+      imgAlt: "Heineken"
+    },
+    {
+      id: 36,
+      name: "Póker",
+      price: "$3.500",
+      description: "Cerveza nacional Póker en presentación botella de vidrio fría.",
+      img: "/api/media?key=products/cervezas/poker.jpg",
+      imgAlt: "Póker"
+    },
+    {
+      id: 37,
+      name: "Coronita",
+      price: "$4.000",
+      description: "Cerveza Corona de presentación pequeña (Coronita) fría.",
+      img: "/api/media?key=products/cervezas/coronita.jpg",
+      imgAlt: "Coronita"
+    }
+  ],
+  adicionales: [
+    {
+      id: 38,
+      name: "Porción de papa",
+      price: "$4.000",
+      description: "Porción extra de papas francesas fritas sazonadas.",
+      img: "/api/media?key=products/adicionales/papas.jpg",
+      imgAlt: "Porción de papa"
+    },
+    {
+      id: 39,
+      name: "Tocineta",
+      price: "$2.000",
+      description: "Adición de tiras de tocineta ahumada crujientes.",
+      img: "/api/media?key=products/adicionales/tocineta.jpg",
+      imgAlt: "Tocineta"
+    },
+    {
+      id: 40,
+      name: "Maíz",
+      price: "$1.500",
+      description: "Adición de granos de maíz tierno salteados.",
+      img: "/api/media?key=products/adicionales/maiz.jpg",
+      imgAlt: "Maíz"
+    }
+  ]
 };
 
 export const SECTION_TITLES: Record<CategoryId, string> = {
-  burgers:     "Burgers Destacadas",
-  pizzas:      "Nuestras Pizzas",
-  salchipapas: "Salchipapas",
-  bebidas:     "Bebidas",
-  postres:     "Postres",
+  entradas:          "Entradas",
+  burgers:           "Hamburguesas",
+  patacones:         "Patacones",
+  salchipapas:       "Salchipapas",
+  asados:            "Asados",
+  burritos:          "Burritos",
+  perros:            "Perros",
+  desgranados:       "Desgranados",
+  alitas:            "Alitas BBQ",
+  bebidas:           "Bebidas",
+  micheladas:        "Micheladas",
+  sodas_saborizadas: "Sodas Saborizadas",
+  cervezas:          "Cervezas",
+  adicionales:       "Adicionales",
 };
 
 /* ─── Shared Helpers ─────────────────────────────────────────── */

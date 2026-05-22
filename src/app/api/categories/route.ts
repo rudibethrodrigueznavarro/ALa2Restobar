@@ -5,7 +5,7 @@ import { verifySession } from "../../../lib/auth";
 // GET: Listar todas las categorías
 export async function GET() {
   try {
-    const result = await query("SELECT * FROM categories ORDER BY name ASC");
+    const result = await query("SELECT * FROM categories ORDER BY display_order ASC, id ASC");
     return NextResponse.json(result.rows);
   } catch (error: any) {
     console.error("GET categories error:", error);
@@ -31,9 +31,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Obtener el máximo display_order actual
+    const maxOrderRes = await query("SELECT COALESCE(MAX(display_order), 0) as max_order FROM categories");
+    const nextOrder = Number(maxOrderRes.rows[0]?.max_order || 0) + 1;
+
     const result = await query(
-      "INSERT INTO categories (name, description) VALUES ($1, $2) RETURNING *",
-      [name, description || ""]
+      "INSERT INTO categories (name, description, display_order) VALUES ($1, $2, $3) RETURNING *",
+      [name, description || "", nextOrder]
     );
 
     return NextResponse.json(result.rows[0]);

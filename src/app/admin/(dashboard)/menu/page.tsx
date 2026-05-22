@@ -17,6 +17,10 @@ export default function CategoriasAdmin() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [reordering, setReordering] = useState(false);
+
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [dragEnabled, setDragEnabled] = useState(false);
 
   // Form State
   const [isEditing, setIsEditing] = useState(false);
@@ -43,6 +47,62 @@ export default function CategoriasAdmin() {
       console.error("Error fetching categories data:", err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const saveCategoryOrder = async (updatedCategories: Category[]) => {
+    if (reordering) return;
+    setReordering(true);
+
+    try {
+      const reorderPayload = updatedCategories.map((cat, idx) => ({
+        id: cat.id,
+        display_order: idx + 1,
+      }));
+
+      const res = await fetch("/api/categories/reorder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ categories: reorderPayload }),
+      });
+
+      if (!res.ok) {
+        alert("Error al guardar el orden de las categorías");
+        fetchData();
+      }
+    } catch (err) {
+      console.error("Reorder error:", err);
+      alert("Error de conexión al reordenar");
+      fetchData();
+    } finally {
+      setReordering(false);
+    }
+  };
+
+  const handleDragStart = (e: React.DragEvent, index: number) => {
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = "move";
+    // FireFox requires setting data to allow drag & drop
+    e.dataTransfer.setData("text/plain", index.toString());
+  };
+
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === index) return;
+
+    const newCategories = [...categories];
+    const draggedItem = newCategories[draggedIndex];
+    newCategories.splice(draggedIndex, 1);
+    newCategories.splice(index, 0, draggedItem);
+
+    setCategories(newCategories);
+    setDraggedIndex(index);
+  };
+
+  const handleDragEnd = () => {
+    if (draggedIndex !== null) {
+      saveCategoryOrder(categories);
+      setDraggedIndex(null);
     }
   };
 
@@ -144,8 +204,16 @@ export default function CategoriasAdmin() {
       <div className="lg:col-span-2 flex flex-col gap-md">
         <div className="flex justify-between items-end mb-sm">
           <div>
-            <h2 className="font-h3 text-h3 text-on-surface font-semibold">Categorías de Menú</h2>
-            <p className="font-body-md text-[13px] text-on-surface-variant">Organiza y agrupa tus platos</p>
+            <h2 className="font-h3 text-h3 text-on-surface font-semibold flex items-center gap-sm">
+              Categorías de Menú
+              {reordering && (
+                <span className="flex items-center gap-xs font-body-md text-[11px] text-primary/80 animate-pulse bg-primary/10 px-2.5 py-0.5 rounded-full font-normal">
+                  <span className="animate-spin h-3 w-3 border-2 border-primary border-t-transparent rounded-full"></span>
+                  Guardando orden...
+                </span>
+              )}
+            </h2>
+            <p className="font-body-md text-[13px] text-on-surface-variant">Organiza y agrupa tus platos (arrastra para reordenar)</p>
           </div>
           <span className="font-label-caps text-label-caps text-on-surface-variant">
             {categories.length} {categories.length === 1 ? "Categoría" : "Categorías"}
@@ -158,37 +226,62 @@ export default function CategoriasAdmin() {
           </div>
         ) : (
           <div className="flex flex-col gap-sm">
-            {categories.map((cat) => (
+            {categories.map((cat, index) => (
               <div
                 key={cat.id}
-                className="glass-panel rounded-xl p-md flex items-center justify-between border border-white/5 hover:border-white/10 transition-colors"
+                draggable={dragEnabled}
+                onDragStart={(e) => handleDragStart(e, index)}
+                onDragOver={(e) => handleDragOver(e, index)}
+                onDragEnd={() => {
+                  handleDragEnd();
+                  setDragEnabled(false);
+                }}
+                className={`glass-panel rounded-xl p-md flex items-center justify-between border transition-all duration-200 ${
+                  draggedIndex === index
+                    ? "opacity-40 border-primary/50 bg-primary/5 scale-[0.99] shadow-inner"
+                    : "border-white/5 hover:border-white/10"
+                }`}
               >
-                <div>
-                  <h3 className="font-h3 text-[16px] text-on-surface font-semibold flex items-center gap-sm">
-                    {cat.name}
-                    <span className="font-label-caps text-[8px] bg-primary/20 text-primary px-2.5 py-0.5 rounded-full">
-                      {getProductCount(cat.id)} {getProductCount(cat.id) === 1 ? "plato" : "platos"}
-                    </span>
-                  </h3>
-                  {cat.description && (
-                    <p className="font-body-md text-[13px] text-on-surface-variant mt-1 max-w-lg">
-                      {cat.description}
-                    </p>
-                  )}
+                <div className="flex items-center gap-md flex-1 min-w-0">
+                  {/* Tirador de arrastre */}
+                  <div
+                    onMouseDown={() => setDragEnabled(true)}
+                    onMouseUp={() => setDragEnabled(false)}
+                    onTouchStart={() => setDragEnabled(true)}
+                    onTouchEnd={() => setDragEnabled(false)}
+                    title="Arrastrar para ordenar"
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant/40 hover:text-primary hover:bg-white/5 cursor-grab active:cursor-grabbing transition-colors shrink-0"
+                  >
+                    <span className="material-symbols-outlined text-[20px] select-none">drag_indicator</span>
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-h3 text-[16px] text-on-surface font-semibold flex items-center gap-sm flex-wrap">
+                      <span className="truncate">{cat.name}</span>
+                      <span className="font-label-caps text-[8px] bg-primary/20 text-primary px-2.5 py-0.5 rounded-full shrink-0">
+                        {getProductCount(cat.id)} {getProductCount(cat.id) === 1 ? "plato" : "platos"}
+                      </span>
+                    </h3>
+                    {cat.description && (
+                      <p className="font-body-md text-[13px] text-on-surface-variant mt-1 break-words whitespace-pre-wrap">
+                        {cat.description}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
-                <div className="flex gap-sm">
+                <div className="flex gap-sm items-center">
                   <button
                     onClick={() => handleEditClick(cat)}
                     title="Editar categoría"
-                    className="w-8 h-8 rounded-full bg-surface flex items-center justify-center text-on-surface hover:text-primary border border-white/5 cursor-pointer"
+                    className="w-8 h-8 rounded-full bg-surface flex items-center justify-center text-on-surface hover:text-primary border border-white/5 cursor-pointer hover:bg-white/5 transition-all"
                   >
                     <span className="material-symbols-outlined text-[16px]">edit</span>
                   </button>
                   <button
                     onClick={() => handleDeleteClick(cat.id)}
                     title="Eliminar categoría"
-                    className="w-8 h-8 rounded-full bg-surface flex items-center justify-center text-on-surface hover:text-error border border-white/5 cursor-pointer"
+                    className="w-8 h-8 rounded-full bg-surface flex items-center justify-center text-on-surface hover:text-error border border-white/5 cursor-pointer hover:bg-white/5 transition-all"
                   >
                     <span className="material-symbols-outlined text-[16px]">delete</span>
                   </button>
