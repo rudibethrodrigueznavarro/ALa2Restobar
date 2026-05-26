@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@300;400;600;700;800&family=Dancing+Script:wght@500;600;700&display=swap");
 @import "tailwindcss";
 
 @theme inline {
@@ -65,9 +65,9 @@
   /* Fonts */
   --font-body-lg: "Inter", sans-serif;
   --font-body-md: "Inter", sans-serif;
-  --font-h2: "Space Grotesk", sans-serif;
+  --font-h2: "Poppins", sans-serif;
   --font-h3: "Space Grotesk", sans-serif;
-  --font-h1: "Space Grotesk", sans-serif;
+  --font-h1: "Poppins", sans-serif;
   --font-label-caps: "Space Grotesk", sans-serif;
 
   /* Font Sizes */
@@ -202,4 +202,23 @@ body {
 
 @utility animate-pop-in {
   animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Modern title style: gradient, heavier weight, tighter tracking */
+.modern-title {
+  font-family: "Dancing Script", var(--font-h2);
+  font-weight: 700;
+  letter-spacing: normal;
+  background: linear-gradient(135deg, #ff9b9b 0%, #ff535b 40%, #bb152c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-transform: none;
+  text-shadow: 0 4px 20px rgba(187,21,44,0.15);
+  transition: transform 160ms ease, filter 160ms ease;
+  padding: 0 4px;
+}
+.modern-title:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: drop-shadow(0 6px 20px rgba(187,21,44,0.25));
 }

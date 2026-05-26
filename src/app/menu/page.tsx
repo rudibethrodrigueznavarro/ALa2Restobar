@@ -254,7 +254,10 @@ export default function Menu() {
               arrow_back
             </span>
           </Link>
-          <h1 className="font-h2 text-h2 uppercase tracking-tighter text-primary">A LA 2 RESTO-BAR</h1>
+          <div className="flex flex-col items-center justify-center -space-y-1">
+            <span className="font-['Dancing_Script'] text-[28px] font-bold tracking-normal modern-title leading-none">A La 2</span>
+            <span className="font-h3 text-[11px] tracking-[0.25em] font-medium text-on-surface-variant uppercase ml-1">RESTO-BAR</span>
+          </div>
           <div className="flex items-center gap-xs">
             <button
               onClick={() => setIsSearchOpen(true)}
