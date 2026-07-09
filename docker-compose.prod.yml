@@ -1,0 +1,113 @@
+version: '3.8'
+
+services:
+  app:
+    # Imagen descargada directamente de internet para que Watchtower la actualice
+    image: mariodiazgomez2/ala2-restobar:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    container_name: ala2-restobar-app
+    restart: always
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - NODE_ENV=${NODE_ENV}
+      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
+      - MINIO_ENDPOINT=${MINIO_ENDPOINT}
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
+      - MINIO_BUCKET_NAME=${MINIO_BUCKET_NAME}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - minio
+    networks:
+      - restobar-network
+
+  db:
+    image: postgres:16-alpine
+    container_name: ala2-restobar-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: produccion_segura_123
+      POSTGRES_DB: basedatos
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - restobar-network
+
+  minio:
+    image: minio/minio
+    container_name: ala2-restobar-minio
+    restart: always
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:-minio_secret_prod_321}
+    command: server /data --console-address ":9001"
+    volumes:
+      - miniodata:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - restobar-network
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: ala2-restobar-ngrok
+    restart: always
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    command:
+      - "http"
+      - "--domain=${NGROK_DOMAIN}"
+      - "app:3000"
+    depends_on:
+      - app
+    networks:
+      - restobar-network
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: ala2-restobar-watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 3600 --cleanup app
+    # Solo revisará actualizaciones para el contenedor 'app' cada 1 hora (3600 seg)
+    
+  backup-agent:
+    image: alpine:latest
+    container_name: ala2-restobar-backup
+    restart: always
+    # Instalamos cliente de postgres y zip
+    command: >
+      /bin/sh -c "apk add --no-cache postgresql16-client zip tzdata && 
+      echo '0 3 * * * /scripts/backup.sh' > /etc/crontabs/root && 
+      crond -f"
+    environment:
+      - PGPASSWORD=produccion_segura_123
+    volumes:
+      # Script de backup (Solo lectura)
+      - ./scripts/backup.sh:/scripts/backup.sh:ro
+      # Volumen de base de datos y minio para extraer
+      - miniodata:/minio_data:ro
+      # Carpeta visible en Windows (Ej. mapeada desde tu PC cliente)
+      # Nota: En Windows, mapear un path absoluto es mejor. Dejaremos ./backups por ahora, pero 
+      # el cliente puede cambiar esto a C:\Respaldos_Restobar:/backups
+      - ./backups:/backups
+    depends_on:
+      - db
+      - minio
+    networks:
+      - restobar-network
+
+volumes:
+  pgdata:
+  miniodata:
+
+networks:
+  restobar-network:
+    driver: bridge
