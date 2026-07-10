@@ -46,6 +46,39 @@ Bienvenido al repositorio del proyecto **A La 2 Restobar**. Este proyecto está 
    ```
    El sitio estará disponible en `http://localhost:3000`.
 
+## Despliegue en Producción (On-Premise con Docker)
+
+Este proyecto está completamente dockerizado para ser instalado en la computadora del cliente de forma local, incluyendo base de datos, almacenamiento, túnel hacia internet y sistema de respaldos.
+
+### Componentes de la Arquitectura
+- **App (Next.js)**: Optimizada con modo `standalone` para mínimo consumo.
+- **PostgreSQL 16**: Base de datos relacional persistente.
+- **MinIO**: Servidor de almacenamiento (S3-compatible) para imágenes.
+- **Ngrok**: Túnel seguro que expone la aplicación local a internet mediante un dominio estático y código QR.
+- **Watchtower**: Actualizador automático silencioso.
+- **Backup Agent**: Script automatizado (`scripts/backup.sh`) que realiza volcados diarios de PostgreSQL y MinIO a las 3:00 AM.
+
+### ¿Qué llevarás a la computadora del Cliente?
+
+Para facilitarte la vida, el archivo `docker-compose.prod.yml` ya tiene apuntado tu nombre de usuario real (`mariodiazgomez2/ala2-restobar:latest`).
+
+En la computadora del cliente **solo necesitas copiar 3 cosas**:
+
+1. El archivo `docker-compose.prod.yml`
+2. El archivo `.env.production` (asegúrate de ponerle tu token de Ngrok adentro)
+3. La carpeta `scripts` (donde está el archivo `.bat` de actualizar y el de los backups).
+
+Cuando estés en la computadora del cliente (con Docker Desktop ya instalado ahí), solo abres la terminal donde pusiste esos 3 archivos y escribes:
+
+```bash
+docker compose -f docker-compose.prod.yml --env-file .env.production up -d
+```
+
+Docker descargará automáticamente tu imagen de internet, levantará PostgreSQL, MinIO, Ngrok y todo funcionará mágicamente.
+
+### Actualización Manual (Por el Cliente)
+El cliente cuenta con el archivo `scripts/Actualizar_Sistema.bat`. Si el desarrollador sube una nueva actualización a Docker Hub, el cliente solo debe hacer **doble clic** en el `.bat` para descargar la versión más reciente sin perder su información.
+
 ## Despliegue en Dokploy
 
 Este proyecto está preparado para ser desplegado en Dokploy:
