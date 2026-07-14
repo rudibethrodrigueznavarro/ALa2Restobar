@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function ConfiguracionAdmin() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [uploadingZip, setUploadingZip] = useState(false);
 
   // Campos de Configuración
   const [whatsappPhone, setWhatsappPhone] = useState("");
@@ -229,6 +230,73 @@ export default function ConfiguracionAdmin() {
           )}
         </button>
       </form>
+
+      {/* Panel: Migración de Datos */}
+      <section className="glass-panel rounded-xl p-md border border-white/5 flex flex-col gap-md">
+        <div className="flex items-center gap-sm">
+          <span className="material-symbols-outlined text-primary">sync_alt</span>
+          <h3 className="font-h3 text-[16px] text-on-surface font-semibold">
+            Migración de Datos
+          </h3>
+        </div>
+        <p className="font-body-md text-[12px] text-on-surface-variant">
+          Exporta todos tus productos y categorías (incluyendo imágenes) en un archivo ZIP, o importa un ZIP previo para restaurarlos.
+          <br /><strong className="text-primary">Atención: Importar reemplazará todos los datos actuales.</strong>
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-md mt-sm">
+          <button
+            type="button"
+            onClick={() => { window.location.href = '/api/migration/export'; }}
+            className="w-full bg-surface/50 border border-white/10 hover:border-primary text-on-surface font-body-md py-md rounded-lg shadow-sm transition-all flex items-center justify-center gap-sm cursor-pointer"
+          >
+            <span className="material-symbols-outlined">download</span>
+            <span>Exportar Datos (ZIP)</span>
+          </button>
+
+          <label className="w-full bg-surface/50 border border-white/10 hover:border-primary text-on-surface font-body-md py-md rounded-lg shadow-sm transition-all flex items-center justify-center gap-sm cursor-pointer">
+            {uploadingZip ? (
+              <span className="animate-spin h-5 w-5 border-2 border-primary border-t-transparent rounded-full"></span>
+            ) : (
+              <span className="material-symbols-outlined">upload</span>
+            )}
+            <span>{uploadingZip ? "Importando..." : "Importar Datos (ZIP)"}</span>
+            <input 
+              type="file" 
+              accept=".zip" 
+              className="hidden" 
+              disabled={uploadingZip}
+              onChange={async (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                if (!confirm("¿Estás seguro de importar? Esto REEMPLAZARÁ todos los productos y categorías actuales.")) return;
+                
+                setUploadingZip(true);
+                const formData = new FormData();
+                formData.append("file", file);
+                
+                try {
+                  const res = await fetch("/api/migration/import", {
+                    method: "POST",
+                    body: formData
+                  });
+                  if (res.ok) {
+                    alert("Datos importados correctamente");
+                    window.location.reload();
+                  } else {
+                    const data = await res.json();
+                    alert("Error: " + data.error);
+                  }
+                } catch (err) {
+                  alert("Error al importar");
+                } finally {
+                  setUploadingZip(false);
+                }
+              }} 
+            />
+          </label>
+        </div>
+      </section>
     </div>
   );
 }
