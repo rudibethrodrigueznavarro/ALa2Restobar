@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { query } from "../../../../lib/db";
 import { verifySession } from "../../../../lib/auth";
 import { s3Client, BUCKET_NAME } from "../../../../lib/minio";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { PutObjectCommand, CreateBucketCommand, HeadBucketCommand } from "@aws-sdk/client-s3";
 import AdmZip from "adm-zip";
 
 export async function POST(req: NextRequest) {
@@ -24,6 +24,20 @@ export async function POST(req: NextRequest) {
 
     let dataJson: any = null;
     
+    // Check if MinIO bucket exists, create if not
+    try {
+      await s3Client.send(new HeadBucketCommand({ Bucket: BUCKET_NAME }));
+    } catch (bucketError: any) {
+      if (bucketError.name === "NotFound" || bucketError.$metadata?.httpStatusCode === 404) {
+        console.log(`Bucket ${BUCKET_NAME} not found. Creating it...`);
+        await s3Client.send(new CreateBucketCommand({ Bucket: BUCKET_NAME }));
+        console.log(`Bucket ${BUCKET_NAME} created successfully.`);
+      } else {
+        console.error("Error checking MinIO bucket:", bucketError);
+        throw bucketError;
+      }
+    }
+
     // Upload files to S3/MinIO
     for (const entry of zipEntries) {
       if (entry.entryName === "data.json") {
