@@ -52,7 +52,7 @@ export async function GET(req: NextRequest) {
     const zipBuffer = zip.toBuffer();
 
     // 6. Return response
-    return new NextResponse(zipBuffer, {
+    return new NextResponse(new Uint8Array(zipBuffer), {
       status: 200,
       headers: {
         "Content-Type": "application/zip",
