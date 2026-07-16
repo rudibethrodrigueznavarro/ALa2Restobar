@@ -1,14 +1,15 @@
 @echo off
+cd /d "%~dp0"
 echo ========================================================
 echo Actualizando Sistema ALa2-Restobar a la ultima version
 echo ========================================================
 echo.
 echo Paso 1: Descargando la version mas reciente de la nube...
-docker compose -f ..\docker-compose.prod.yml pull app
+docker compose --env-file ..\.env.production -f ..\docker-compose.prod.yml pull app
 
 echo.
 echo Paso 2: Reiniciando el sistema con la nueva version...
-docker compose -f ..\docker-compose.prod.yml up -d
+docker compose --env-file ..\.env.production -f ..\docker-compose.prod.yml up -d
 
 echo.
 echo ========================================================

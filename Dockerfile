@@ -40,6 +40,8 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/database ./database
+COPY --from=builder --chown=nextjs:nodejs /app/scripts ./scripts
 
 USER nextjs
 
@@ -49,4 +51,4 @@ ENV PORT=3000
 # set hostname to localhost
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+CMD ["sh", "-c", "node scripts/init-db.js && node server.js"]

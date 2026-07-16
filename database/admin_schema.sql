@@ -45,11 +45,6 @@ INSERT INTO settings (key, value) VALUES
 ('restaurant_address', 'Calle Principal #12-34')
 ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;
 
--- Asegurar usuario administrador por defecto
--- Contraseña en texto plano: admin123 (Hash SHA-256 hexadecimal: 2407891877f68c9b00708515c010b7a82767d4f40f12a3d0f73f98a2455e43c5)
-INSERT INTO users (username, password_hash, role) VALUES
-('admin', '2407891877f68c9b00708515c010b7a82767d4f40f12a3d0f73f98a2455e43c5', 'admin')
-ON CONFLICT (username) DO NOTHING;
 
 -- Semillas iniciales para categorías si están vacías
 INSERT INTO categories (id, name, description) VALUES
